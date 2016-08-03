@@ -27,7 +27,8 @@ catkin_package(
 ## Build ##
 ###########
 
-include_directories(include
+include_directories(
+  include
   ${catkin_INCLUDE_DIRS}
   ${avcodec_INCLUDE_DIRS}
   ${swscale_INCLUDE_DIRS}
@@ -35,7 +36,8 @@ include_directories(include
 
 ## Build the USB camera library
 add_library(${PROJECT_NAME} src/usb_cam.cpp)
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(
+  ${PROJECT_NAME}
   ${avcodec_LIBRARIES}
   ${swscale_LIBRARIES}
   ${catkin_LIBRARIES}
@@ -43,7 +45,8 @@ target_link_libraries(${PROJECT_NAME}
 
 ## Declare a cpp executable
 add_executable(${PROJECT_NAME}_node nodes/usb_cam_node.cpp)
-target_link_libraries(${PROJECT_NAME}_node
+target_link_libraries(
+  ${PROJECT_NAME}_node
   ${PROJECT_NAME}
   ${avcodec_LIBRARIES}
   ${swscale_LIBRARIES}
@@ -55,18 +58,21 @@ target_link_libraries(${PROJECT_NAME}_node
 #############
 
 ## Mark executables and/or libraries for installation
-install(TARGETS ${PROJECT_NAME}_node ${PROJECT_NAME}
+install(
+  TARGETS ${PROJECT_NAME}_node ${PROJECT_NAME}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 )
 
 ## Copy launch files
-install(DIRECTORY launch/
+install(
+  DIRECTORY launch/
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
   FILES_MATCHING PATTERN "*.launch"
 )
 
-install(DIRECTORY include/${PROJECT_NAME}/
-   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-   FILES_MATCHING PATTERN "*.h" PATTERN "*.hpp"
+install(
+  DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN "*.h" PATTERN "*.hpp"
 )
